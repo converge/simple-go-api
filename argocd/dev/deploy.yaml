@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-go-api
+spec:
+  selector:
+    matchLabels:
+      app: simple-go-api
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: simple-go-api
+    spec:
+      containers:
+      - name: simple-go-api
+        image: convergede/simple-go-api
+        ports:
+        - containerPort: 7001
