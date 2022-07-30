@@ -4,7 +4,7 @@ metadata:
   name: simple-go-api
   namespace: argocd
 spec:
-  project: default
+  project: test1
 
   source:
     repoURL: https://github.com/converge/simple-go-api.git
