@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: simple-go-api
+  name: argocd-simple-go-api
   namespace: argocd
 spec:
-  project: test1
+  project: default
 
   source:
     repoURL: https://github.com/converge/simple-go-api.git
