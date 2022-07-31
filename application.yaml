@@ -7,7 +7,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/converge/simple-go-api.git
+    repoURL: git@github.com:converge/simple-go-api.git
     targetRevision: HEAD
     path: argocd/dev
   destination:
