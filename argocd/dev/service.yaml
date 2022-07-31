@@ -18,6 +18,6 @@ spec:
   type: NodePort
   ports:
   - port: 7001
-    nodePort: 7001
+    nodePort: 30012
   selector:
     app: simple-go-api
