@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: simple-go-api
-  replicas: 44
+  replicas: 2
   template:
     metadata:
       labels:
