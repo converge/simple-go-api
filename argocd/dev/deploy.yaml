@@ -2,12 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: simple-go-api
-  namespace: dev
 spec:
   selector:
     matchLabels:
       app: simple-go-api
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
