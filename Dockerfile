@@ -1,9 +1,9 @@
-FROM golang:1.18-alpine3.16
+FROM golang:1.19-alpine3.16
 
 WORKDIR /opt/app
 
 COPY . .
 
-RUN go build -o simple-go-api
+RUN cd cmd/http && go build -o ../../simple-go-api
 
 CMD ["./simple-go-api"]

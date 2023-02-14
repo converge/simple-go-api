@@ -1,16 +1,15 @@
 package main
 
 import (
+	"github.com/converge/simple-go-api/api"
 	"log"
 	"net/http"
 )
 
 func main() {
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		log.Println("main endpoint :)")
-		w.Write([]byte("hi!"))
-	})
+	http.HandleFunc("/", api.Version)
+	http.HandleFunc("/healthz", api.Healthz)
 	service := http.Server{
 		Addr: ":7001",
 	}
