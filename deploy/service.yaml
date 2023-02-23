@@ -7,6 +7,7 @@ spec:
     app: simple-go-api
   type: ClusterIP
   ports:
-  - targetPort: 7001
-    port: 7001
-    protocol: TCP
+    - name: http
+      port: 80
+      targetPort: 7001
+      protocol: TCP

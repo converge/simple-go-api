@@ -2,6 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: simple-go-api
+  namespace: dev
+  labels:
+    app: simple-go-api
+  annotations:
+    description: "this is a simple go api"
 spec:
   selector:
     matchLabels:
@@ -14,6 +19,6 @@ spec:
     spec:
       containers:
       - name: simple-go-api
-        image: convergede/simple-go-api:1.1
+        image: joaovanzuita/simple-go-api:1.2
         ports:
         - containerPort: 7001
