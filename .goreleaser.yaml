@@ -42,7 +42,7 @@ changelog:
       - '^chore:'
   use: github
   groups:
-    - title: Features
+    - title: New Features
       regexp: '^.*?feat(\([[:word:]]+\))??!?:.+$'
       order: 0
     - title: "Bug fixes"
