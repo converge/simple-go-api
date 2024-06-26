@@ -1,4 +1,4 @@
-name: sonarqube
+name: test
 on:
   push
 jobs:
