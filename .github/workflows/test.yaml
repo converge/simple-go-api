@@ -35,8 +35,8 @@ jobs:
           else
             echo "NOT enabled"
           fi
-      # go releaser
-      - name: release
+      # go releaser build
+      - name: build
         uses: goreleaser/goreleaser-action@v6
         with:
           distribution: goreleaser
@@ -44,6 +44,16 @@ jobs:
           version: "~> v2"
           args: build --clean
         #          args: release --clean --dry-run
+          workdir: ./cmd/http
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # go releaser
+      - name: release
+        uses: goreleaser/goreleaser-action@v6
+        with:
+          distribution: goreleaser
+          version: "~> v2"
+          args: release --clean --skip=publish
           workdir: ./cmd/http
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
