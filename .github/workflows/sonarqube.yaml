@@ -1,0 +1,20 @@
+name: sonarqube
+on:
+  push:
+    branches:
+      - master
+jobs:
+  sonarqube:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: SonarQube Scan
+        # skip sonar quality check for non-master branch
+        if: github.ref == 'refs/heads/master'
+        uses: sonarsource/sonarqube-scan-action@v2.2.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: 'https://sonarqube.2kcoretech.online'

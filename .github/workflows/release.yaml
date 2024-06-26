@@ -19,23 +19,25 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: 1.21.11
-      - name: my-step
-        if: ${{ inputs.dry-run == false }}
-        run: echo "Hello World! false condition met"
-      - name: create tag
-        run: |
-          # install svu to calculate next semver version
-          go install github.com/caarlos0/svu/v2@v2.0.1
-          git tag $(svu next)
-          git push --tags
-      - name: check-flag
-        run: |
-          if ${{ inputs.dry-run == true }}; then
-            echo "feature enabled"
-          else
-            echo "NOT enabled"
-          fi
+#      - name: my-step
+#        if: ${{ inputs.dry-run == false }}
+#        run: echo "Hello World! false condition met"
+#      - name: create tag
+#        run: |
+#          # install svu to calculate next semver version
+#          go install github.com/caarlos0/svu/v2@v2.0.1
+#          git tag $(svu next)
+#          git push --tags
+#      - name: check-flag
+#        run: |
+#          if ${{ inputs.dry-run == true }}; then
+#            echo "feature enabled"
+#          else
+#            echo "NOT enabled"
+#          fi
       # go releaser
+      - name: test
+        run: go test -v ./...
       - name: release
         uses: goreleaser/goreleaser-action@v6
         with:
