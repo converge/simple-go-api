@@ -8,7 +8,7 @@ on:
         type: boolean
         default: true
 jobs:
-  my-job:
+  release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -41,7 +41,9 @@ jobs:
         with:
           distribution: goreleaser
           version: "~> v2"
-          args: release --clean --skip=publish
+#          args: ${{ if inputs.dry-run == 'true' }}release --clean --skip=publish${{ else }}release --clean${{ endif }}
+          args: release --clean ${{ inputs.dry-run == true && '--skip=publish' }}
+#          args: release --clean --skip=publish
           workdir: ./cmd/http
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
