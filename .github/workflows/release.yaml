@@ -34,7 +34,7 @@ jobs:
           # install svu to calculate next semver version
           go install github.com/caarlos0/svu/v2@v2.0.1
           git tag $(svu next)
-          git push --tags
+#          git push --tags
       # go releaser
       - name: test
         run: go test -v ./...
