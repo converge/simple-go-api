@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       dry-run:
-        description: 'dry run'
+        description: 'Dry Run'
         required: true
         type: boolean
         default: true
@@ -18,16 +18,10 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: 1.21.11
+          go-version: ${{vars.CI_GO_VERSION}}
 #      - name: my-step
 #        if: ${{ inputs.dry-run == false }}
 #        run: echo "Hello World! false condition met"
-#      - name: create tag
-#        run: |
-#          # install svu to calculate next semver version
-#          go install github.com/caarlos0/svu/v2@v2.0.1
-#          git tag $(svu next)
-#          git push --tags
 #      - name: check-flag
 #        run: |
 #          if ${{ inputs.dry-run == true }}; then
@@ -35,6 +29,12 @@ jobs:
 #          else
 #            echo "NOT enabled"
 #          fi
+      - name: create tag
+        run: |
+          # install svu to calculate next semver version
+          go install github.com/caarlos0/svu/v2@v2.0.1
+          git tag $(svu next)
+          git push --tags
       # go releaser
       - name: test
         run: go test -v ./...
