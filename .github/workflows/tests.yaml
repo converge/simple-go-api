@@ -10,7 +10,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Set up Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v5.0.1
         with:
           go-version: ${{ env.ci_go_version }}
       - name: test
