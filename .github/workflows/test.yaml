@@ -26,6 +26,7 @@ jobs:
         run: |
           # install svu to calculate next semver version
           go install github.com/caarlos0/svu/v2@v2.0.1
+          git tag -d v0.1.0
           git tag $(svu next)
           git push --tags
       - name: check-flag
