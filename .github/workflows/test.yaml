@@ -1,0 +1,48 @@
+name: release
+on:
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: 'dry run'
+        required: true
+        type: boolean
+        default: true
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.21.11
+      - name: my-step
+        if: ${{ inputs.dry-run == false }}
+        run: echo "Hello World! false condition met"
+      - name: create tag
+        run: |
+          # install svu to calculate next semver version
+          go install github.com/caarlos0/svu/v2@v2.0.1
+          git tag $(svu next)
+          git push --tags
+      - name: check-flag
+        run: |
+          if ${{ inputs.dry-run == true }}; then
+            echo "feature enabled"
+          else
+            echo "NOT enabled"
+          fi
+      # go releaser
+      - name: release
+        uses: goreleaser/goreleaser-action@v6
+        with:
+          distribution: goreleaser
+          # 'latest', 'nightly', or a semver
+          version: "~> v2"
+          args: build
+        #          args: release --clean --dry-run
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
