@@ -42,7 +42,7 @@ jobs:
           distribution: goreleaser
           version: "~> v2"
 #          args: ${{ if inputs.dry-run == 'true' }}release --clean --skip=publish${{ else }}release --clean${{ endif }}
-          args: release --clean ${{ inputs.dry-run == true && '--skip=publish' }}
+          args: release --clean ${{ inputs.dry-run == true && '--skip=publish' || '' }}
 #          args: release --clean --skip=publish
           workdir: ./cmd/http
         env:
