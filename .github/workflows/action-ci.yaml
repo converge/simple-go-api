@@ -13,5 +13,5 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: ${{vars.CI_GO_VERSION}}
-      - name: test
+      - name: Test
         run: go test -v ./...
