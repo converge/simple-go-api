@@ -29,23 +29,20 @@ jobs:
 #          else
 #            echo "NOT enabled"
 #          fi
-      - name: create tag
+      - name: Create Tag
         run: |
           # install svu to calculate next semver version
           go install github.com/caarlos0/svu/v2@v2.0.1
           git tag $(svu next)
-#          git push --tags
       # go releaser
-      - name: test
+      - name: Test
         run: go test -v ./...
-      - name: release
+      - name: Telease
         uses: goreleaser/goreleaser-action@v6
         with:
           distribution: goreleaser
           version: "~> v2"
-#          args: ${{ if inputs.dry-run == 'true' }}release --clean --skip=publish${{ else }}release --clean${{ endif }}
           args: release --clean ${{ inputs.dry-run == true && '--skip=publish' || '' }}
-#          args: release --clean --skip=publish
           workdir: ./cmd/http
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
