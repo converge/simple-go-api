@@ -42,7 +42,7 @@ jobs:
         with:
           distribution: goreleaser
           version: "~> v2"
-          args: release --clean ${{ inputs.dry-run == true && '--skip=publish' || '' }}
+          args: release --clean ${{ inputs.dry-run && '--skip=publish' || '' }}
           workdir: ./cmd/http
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
